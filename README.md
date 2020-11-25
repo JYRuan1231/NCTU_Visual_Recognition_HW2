@@ -18,70 +18,104 @@ Example:
 
 ```
 python generate_dataset.py
-
 ```
 
-***important parameters in config.py***
+***important arguments about Generate Dataset in config.py***
 
 Default:
 
 | Argument    | Default value |
 | ------------|:-------------:|
-| annotation_file         | model/SVHN_annotation.pkl        |
+| annotation_file         | SVHN_annotation.pkl       |
 
  
 
   
-
-
-When the program was finished, we will get a file `SVHN_annotation.pkl` in `/model/`.
+When the program was finished, we will get a file `SVHN_annotation.pkl` in `/model/`.\
 Now we have one pkl file .
 
 ```
 ./models/SVHN_annotation.pkl  
 ```
 
-### Traning
-
-We supply two ways to use Ensemble Learning as well. Need to put trained models in folder `/models/`.
+### Traning Model
 
 Example:
 
 ```
-python ensemble.py -m resnet50_1_model -m resnet50_2_model 
-
-
-Required arguments:
---model -m 		Select the model you want to use ensemble learning in folder /models/.
+python train.py
 ```
 
-OR
+***important arguments about Traning Model in config.py***
+
+Default:
+These arguments is basic setting for model.
+
+| Argument    | Default value |
+| ------------|:-------------:|
+|model_name             |  faster_rcnn_efficientnetb4_v1.pth             |
+|batch_size             |  32             |
+|workers             |  4             |
+|num_classes             |  11  (classes+background)           |
+|batch_size             |  32             |
+|max_size             |  380  (Resize image )           |
+|min_size             |  380  (Resize image )           |
+
+And, these is related to your training performance.
+
+| Argument    | Default value |
+| ------------|:-------------:|
+|epochs             |  18             |
+|learning_rate             |  0.01             |
+|momentum           |  0.9           |
+|num_classes             |  11  (classes+background)           |
+|weight_decay             |  5e-4            |
+|milestones             |  [5, 12] (MultiStepLR)           |
+|gamma             |  0.1           |
+
+When the program was finished, we will get a traning model file in `/model/`.
 
 ```
-from ensemble import ensemble_learning
-
-models = ["resnet50_1_model","resnet50_2_model"]
-ensemble_learning(models)
+./model/faster_rcnn_efficientnetb4_v1.pth
 ```
 
-When the program was finished, we will get a csv file `/result/`.
+### Testing Model
+
+If we want to test image, make sure we have a model in `/model/` first and confirm `model_name`.
+
+Example:
 
 ```
-./result/voting.csv
+python test.py
 ```
-## Result
 
-| Model Name                    | Testing Performance (on Kaggle) |
-| ------------------------------|:-------------------------------:|
-| Resnet50                      | 0.90040                         |
-| Densen201                     | 0.91320                         |
-| Resnext50_32x4d               | 0.92140                         |
-| Inceptionresnet_v2            | 0.92460                         |
-| Resnext101_32x8d              | 0.92820                         |
-| Efficienct_net_b4             | 0.93680                         |
-| Top 3 model (ensmble learning)| 0.94240                         |
-| Top 5 model (ensmble learning)| 0.94640                         |
-| Top 7 model (ensmble learning)| 0.94900                         |
+***important arguments about Testing Model in config.py***
 
 
+Default:
 
+| Argument    | Default value |
+| ------------|:-------------:|
+|score_threshold             |  0.3             |
+|IoU_threshold             |  1 (eliminate overlapping boxes)             |
+|json_name             |      0856566.json       |
+
+When the program was finished, we will get a json file in /result/.
+```
+./result/0856566.json
+```
+### Visualize Testing images with bounding box
+
+Adjust a few parameters to visualize the test images with bounding box.
+
+***important arguments about Testing Model in config.py***
+
+
+Default:
+
+| Argument    | Default value |
+| ------------|:-------------:|
+|IoU_threshold             |  1 (suggest 0.2~0.5)             |
+|plot_img             |      True       |
+
+<img src="image/Visualize.png" width=400>
