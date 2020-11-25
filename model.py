@@ -37,15 +37,17 @@ class backboneWithFPN(nn.Module):
     def __init__(self, backbone):
         super(backboneWithFPN, self).__init__()
 
-        # tf_efficientnet_b4
-        self.body = IntermediateLayerGetter(backbone, return_layers={'block4': '1', 'block5': '2',
-                                                                     'block6': '3', 'conv_head': '4'})
+        # resnet
+        #         self.body = IntermediateLayerGetter(backbone, return_layers={'layer2': '1', 'layer3': '2', 'layer4': '3'})
+        # efficientnet
+        self.body = IntermediateLayerGetter(backbone,
+                                            return_layers={'block3': '0', 'block4': '1', 'block5': '2', 'block6': '3'})
         self.fpn = FeaturePyramidNetwork(
-            in_channels_list=[160, 272, 448, 1792],
-            out_channels=256,
+            in_channels_list=[112, 160, 272, 448],
+            out_channels=112,
             extra_blocks=LastLevelMaxPool(),
         )
-        self.out_channels=256
+        self.out_channels = 112
 
     def forward(self, x):
         x = self.body(x)
@@ -58,8 +60,7 @@ class backboneNet_efficient(nn.Module):
         super(backboneNet_efficient, self).__init__()
         net = timm.create_model('tf_efficientnet_b4', pretrained=True)
 
-        layers_to_train = ['conv_head', 'block6', 'block5', 'block4', 'block3', 'block2'
-                                                                                'block1', 'block0', 'conv_stem'][:4]
+        layers_to_train = ['blocks']
 
         for name, parameter in net.named_parameters():
             if all([not name.startswith(layer) for layer in layers_to_train]):

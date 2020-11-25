@@ -81,7 +81,7 @@ def get_iou(bb1, bb2):
 
 def plot_img_bbox(img_path, bbox):
     bbox_back = bbox.astype('float')
-    image = cv2.imread(test_path + file)[:, :, ::-1]
+    image = cv2.imread(img_path)[:, :, ::-1]
     plotted_img = draw_rect(image, bbox_back)
     plt.title(label)
     plt.imshow(plotted_img)
@@ -127,8 +127,8 @@ if __name__ == "__main__":
     model_ft.load_state_dict(torch.load(cfg.model_name).state_dict())
     model_ft.to(device)
 
-
-    with open(cfg.json_name, 'w', encoding='utf-8') as json_f:
+    json_path = cfg.result_pth + cfg.json_name
+    with open(json_path, 'w', encoding='utf-8') as json_f:
         for file in allFileList:
             if os.path.isfile(cfg.test_path + file):
                 print(file)

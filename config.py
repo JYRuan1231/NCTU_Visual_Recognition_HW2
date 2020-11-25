@@ -8,7 +8,7 @@
 generate_dataset_mat = './data/train/digitStruct.mat'
 train_img_folder = './data/train/' # training dataset path
 test_img_folder = './data/test/'  # testing images
-annotation_file = './digit_annotation.pkl'  # training label
+annotation_file = './model/SVHN_annotation.pkl'  # training label
 
 ##################################################
 # Training Config
@@ -36,8 +36,7 @@ weight_decay = 5e-4
 milestones = [5,12]
 gamma = 0.1
 
-# Logging Config
-result_pth = './results/'
+
 model_pth = '.'
 
 
@@ -49,5 +48,5 @@ test_path = './data/test/'
 score_threshold = 0.3
 IoU_threshold = 1
 plot_img = False
-
+result_pth = './results/'
 json_name = '0856566.json' #submit json name

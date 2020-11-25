@@ -17,13 +17,10 @@ def get_img_boxes(idx, f):
     # read idx-th bbox
     bboxs = f['digitStruct']['bbox']
     box = f[bboxs[idx][0]]
-    # add every key into label and bbox numpy array
-    # shape: (n,4), n is number of digits in idx-th image
     n = box['label'].shape[0]
     bbox = np.zeros((n,4),dtype=float)
     # shape: (n)
     label = np.zeros(n,dtype=int)
-    
     if n == 1:
         label[0] = int(box['label'][0][0])
             
@@ -47,8 +44,6 @@ def dict_img_label_bbox(mat_file):
     
     data_dict = {}
     for j in range(f['/digitStruct/bbox'].shape[0]):
-        # read image name, label and bbox, and add into dict 
-        # data_dict['img_name'] = (label, bbox)
         img_name = get_img_name(j, f)
         attr = get_img_boxes(j, f)
         data_dict[img_name] = attr
