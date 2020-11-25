@@ -4,19 +4,18 @@
 
 # generate testing/valid dataset
 
-
+model_folder = './model/'
 generate_dataset_mat = './data/train/digitStruct.mat'
 train_img_folder = './data/train/' # training dataset path
 test_img_folder = './data/test/'  # testing images
-annotation_file = './model/SVHN_annotation.pkl'  # training label
-
+annotation_file = './SVHN_annotation.pkl'  # training label
+annotation_file = model_folder + annotation_file
 ##################################################
 # Training Config
 ##################################################
 
 # model parameter
 train_path = './data/train/'
-model_folder = './model/'
 model_name = 'faster_rcnn_efficientnetb4_v1.pth'
 batch_size = 32  # batch size
 workers = 4  # number of Dataloader workers
