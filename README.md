@@ -106,7 +106,7 @@ When the program was finished, we will get a json file in /result/.
 ```
 ### Visualize Testing images with bounding box
 
-Adjust a few parameters to visualize the test images with bounding box.
+Adjust a few parameters to visualize the test images with bounding box. (In pynb, it works)
 
 ***important arguments about Testing Model in config.py***
 
