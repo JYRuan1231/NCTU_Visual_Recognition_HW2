@@ -8,7 +8,8 @@ We training and testing with Python 3.6, pytorch 1.4 and **Need** to reference [
 
 ### Traning and Testing model
 First, this Faster R-CNN applies Efficient-Net-b4 as a backbone to extract features.\
-If you want to use this network for training, you must generate a compliant dataset.
+If you want to use this network for training, you must generate a compliant dataset.\
+Alternatively, my model can be loaded: https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing
 
 Before generating the data, Upload  the training images to `/data/train` and the test data to `/data/train`.\
 Make sure you have the mat file(default name: **digitStruct.mat**) in the `/data/train` folder.
@@ -44,7 +45,6 @@ Example:
 ```
 python train.py
 ```
-Alternatively, my model can be loaded: https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing
 
 ***important arguments about Traning Model in config.py***
 
