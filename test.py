@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torchvision
 import csv
+import matplotlib.pyplot as plt
 import timm
 import time
 import glob
@@ -107,7 +108,7 @@ def process_bbox_iou(bbox, label, score, threshold, iou_threshold):
 
 
 if __name__ == "__main__":
-    device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     data_transforms = transforms.Compose(
         [
@@ -142,7 +143,7 @@ if __name__ == "__main__":
             if os.path.isfile(cfg.test_path + file):
                 print(file)
                 output_dict = {}
-                path = test_path + file
+                path = cfg.test_path + file
                 img = Image.open(path).convert("RGB")
                 img = data_transforms(img)
                 img = img.unsqueeze(0)
@@ -154,9 +155,9 @@ if __name__ == "__main__":
                     bbox = output[0]["boxes"].cpu().numpy()
                     label = output[0]["labels"].cpu().numpy()
                     score = output[0]["scores"].cpu().numpy()
-                    bbox = bbox[score > score_threshold].astype("int")
-                    label = label[score > score_threshold]
-                    score = score[score > score_threshold]
+                    bbox = bbox[score > cfg.score_threshold].astype("int")
+                    label = label[score > cfg.score_threshold]
+                    score = score[score > cfg.score_threshold]
 
                     # remove redundant bounding box
                     bbox, label, score = process_bbox_iou(
@@ -167,7 +168,7 @@ if __name__ == "__main__":
                         cfg.IoU_threshold,
                     )
 
-                    if plot_img == cfg.plot_img:  # plot image
+                    if cfg.plot_img:  # plot image
                         plot_img_bbox(path, bbox)
                     for i in range(bbox.shape[0]):
                         bbox[i] = [

@@ -44,5 +44,5 @@ test_path = "./data/test/"
 score_threshold = 0.3
 IoU_threshold = 1
 plot_img = False
-result_pth = "./results/"
+result_pth = "./result/"
 json_name = "0856566.json"  # submit json name
