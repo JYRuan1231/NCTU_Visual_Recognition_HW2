@@ -27,7 +27,10 @@ from dataset import SVHNDataset, collate_fn
 from torchvision.models._utils import IntermediateLayerGetter
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
-from torchvision.ops.feature_pyramid_network import FeaturePyramidNetwork, LastLevelMaxPool
+from torchvision.ops.feature_pyramid_network import (
+    FeaturePyramidNetwork,
+    LastLevelMaxPool,
+)
 from torchvision.models.detection import FasterRCNN
 from torchvision.models.detection.rpn import AnchorGenerator
 from torchvision.ops.misc import FrozenBatchNorm2d
@@ -40,8 +43,15 @@ class backboneWithFPN(nn.Module):
         # resnet
         #         self.body = IntermediateLayerGetter(backbone, return_layers={'layer2': '1', 'layer3': '2', 'layer4': '3'})
         # efficientnet
-        self.body = IntermediateLayerGetter(backbone,
-                                            return_layers={'block3': '0', 'block4': '1', 'block5': '2', 'block6': '3'})
+        self.body = IntermediateLayerGetter(
+            backbone,
+            return_layers={
+                "block3": "0",
+                "block4": "1",
+                "block5": "2",
+                "block6": "3",
+            },
+        )
         self.fpn = FeaturePyramidNetwork(
             in_channels_list=[112, 160, 272, 448],
             out_channels=112,
@@ -58,9 +68,9 @@ class backboneWithFPN(nn.Module):
 class backboneNet_efficient(nn.Module):
     def __init__(self):
         super(backboneNet_efficient, self).__init__()
-        net = timm.create_model('tf_efficientnet_b4', pretrained=True)
+        net = timm.create_model("tf_efficientnet_b4", pretrained=True)
 
-        layers_to_train = ['blocks']
+        layers_to_train = ["blocks"]
 
         for name, parameter in net.named_parameters():
             if all([not name.startswith(layer) for layer in layers_to_train]):

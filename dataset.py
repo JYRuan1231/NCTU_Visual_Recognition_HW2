@@ -23,14 +23,13 @@ from data_augment.util import *
 from data_augment.autoaugment import SVHNPolicy
 
 
-
 class SVHNDataset(Dataset):
     def __init__(self, data_folder, is_train, split):
         self.data_folder = data_folder
         self.is_train = is_train
 
         self.annot_dict = {}
-        with open(cfg.annotation_file, 'rb') as file:
+        with open(cfg.annotation_file, "rb") as file:
             self.annot_dict = pickle.load(file)
 
         # Random generate training and validation dataset
@@ -44,24 +43,28 @@ class SVHNDataset(Dataset):
     def __getitem__(self, i):
 
         data_transforms = {
-            'train': transforms.Compose([
-                # autoaugent
-                SVHNPolicy(),
-                transforms.ToTensor(),
-            ]),
-            'val': transforms.Compose([
-                # autoaugent
-                transforms.ToTensor(),
-            ])
+            "train": transforms.Compose(
+                [
+                    # autoaugent
+                    SVHNPolicy(),
+                    transforms.ToTensor(),
+                ]
+            ),
+            "val": transforms.Compose(
+                [
+                    # autoaugent
+                    transforms.ToTensor(),
+                ]
+            ),
         }
 
-        phase = 'val'
+        phase = "val"
         if self.is_train == True:
-            phase = 'train'
+            phase = "train"
 
         # Read image
         image = Image.open(self.images[i])
-        image = image.convert('RGB')
+        image = image.convert("RGB")
         img_name = os.path.basename(self.images[i])
 
         # Read objects in this image (bounding boxes, labels)
@@ -82,6 +85,7 @@ class SVHNDataset(Dataset):
 
     def __len__(self):
         return len(self.images)
+
 
 def collate_fn(batch):
     return tuple(zip(*batch))

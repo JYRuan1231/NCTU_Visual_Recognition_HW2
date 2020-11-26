@@ -30,6 +30,7 @@ from torchvision.models.detection.rpn import AnchorGenerator
 from torchvision.ops.misc import FrozenBatchNorm2d
 from model import backboneNet_efficient, backboneWithFPN
 
+
 def get_iou(bb1, bb2):
     """
     Calculate the Intersection over Union (IoU) of two bounding boxes.
@@ -80,7 +81,7 @@ def get_iou(bb1, bb2):
 
 
 def plot_img_bbox(img_path, bbox):
-    bbox_back = bbox.astype('float')
+    bbox_back = bbox.astype("float")
     image = cv2.imread(img_path)[:, :, ::-1]
     plotted_img = draw_rect(image, bbox_back)
     plt.title(label)
@@ -98,7 +99,7 @@ def process_bbox_iou(bbox, label, score, threshold, iou_threshold):
                     score[i] = 0
                 else:
                     score[j] = 0
-    bbox = bbox[score > threshold].astype('int')
+    bbox = bbox[score > threshold].astype("int")
     label = label[score > threshold]
     score = score[score > threshold]
 
@@ -108,12 +109,15 @@ def process_bbox_iou(bbox, label, score, threshold, iou_threshold):
 if __name__ == "__main__":
     device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
 
-    data_transforms = transforms.Compose([transforms.ToTensor(), ])
+    data_transforms = transforms.Compose(
+        [
+            transforms.ToTensor(),
+        ]
+    )
     output_json = []
     allFileList = os.listdir(cfg.test_path)
     allFileList.sort()
     allFileList.sort(key=lambda x: int(x[:-4]))
-
 
     # Load model
     backbone = backboneNet_efficient()  # use efficientnet as our backbone
@@ -121,20 +125,25 @@ if __name__ == "__main__":
 
     anchor_generator = AnchorGenerator(cfg.anchor_sizes, cfg.aspect_ratios)
 
-    model_ft = FasterRCNN(backboneFPN, num_classes=cfg.num_classes, rpn_anchor_generator=anchor_generator,
-                          min_size=cfg.min_size, max_size=cfg.max_size)
+    model_ft = FasterRCNN(
+        backboneFPN,
+        num_classes=cfg.num_classes,
+        rpn_anchor_generator=anchor_generator,
+        min_size=cfg.min_size,
+        max_size=cfg.max_size,
+    )
 
     model_ft.load_state_dict(torch.load(cfg.model_folder + cfg.model_name))
     model_ft.to(device)
 
     json_path = cfg.result_pth + cfg.json_name
-    with open(json_path, 'w', encoding='utf-8') as json_f:
+    with open(json_path, "w", encoding="utf-8") as json_f:
         for file in allFileList:
             if os.path.isfile(cfg.test_path + file):
                 print(file)
                 output_dict = {}
                 path = test_path + file
-                img = Image.open(path).convert('RGB')
+                img = Image.open(path).convert("RGB")
                 img = data_transforms(img)
                 img = img.unsqueeze(0)
                 with torch.no_grad():
@@ -145,17 +154,28 @@ if __name__ == "__main__":
                     bbox = output[0]["boxes"].cpu().numpy()
                     label = output[0]["labels"].cpu().numpy()
                     score = output[0]["scores"].cpu().numpy()
-                    bbox = bbox[score > score_threshold].astype('int')
+                    bbox = bbox[score > score_threshold].astype("int")
                     label = label[score > score_threshold]
                     score = score[score > score_threshold]
 
                     # remove redundant bounding box
-                    bbox, label, score = process_bbox_iou(bbox, label, score, cfg.score_threshold, cfg.IoU_threshold)
+                    bbox, label, score = process_bbox_iou(
+                        bbox,
+                        label,
+                        score,
+                        cfg.score_threshold,
+                        cfg.IoU_threshold,
+                    )
 
-                    if plot_img == cfg.plot_img:   # plot image
-                         plot_img_bbox(path,bbox)
+                    if plot_img == cfg.plot_img:  # plot image
+                        plot_img_bbox(path, bbox)
                     for i in range(bbox.shape[0]):
-                        bbox[i] = [bbox[i][1], bbox[i][0], bbox[i][3], bbox[i][2]]
+                        bbox[i] = [
+                            bbox[i][1],
+                            bbox[i][0],
+                            bbox[i][3],
+                            bbox[i][2],
+                        ]
 
                     output_dict["bbox"] = bbox.tolist()
                     output_dict["label"] = label.tolist()
