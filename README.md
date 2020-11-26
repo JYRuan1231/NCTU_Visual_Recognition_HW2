@@ -7,7 +7,7 @@ The project is training an accurate object detection neteork using Faster R-CNN 
 We training and testing with Python 3.6, pytorch 1.4 and **Need** to reference [timm](https://github.com/rwightman/pytorch-image-models), [AutoAugment](https://github.com/DeepVoltaire/AutoAugment), [DataAugmentationForObjectDetection](https://github.com/Paperspace/DataAugmentationForObjectDetection) and [mAP](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection).
 
 ### Traning and Testing model
-First, this Faster R-CNN applies Efficient-Net-b4 as a backbone to extract features.\
+First, this Faster R-CNN uses EfficientNet-b4 as a backbone to extract features.\
 If you want to use this network for training, you must generate a compliant dataset.\
 Alternatively, my model can be loaded: https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing
 
