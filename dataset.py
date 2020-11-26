@@ -45,11 +45,19 @@ class SVHNDataset(Dataset):
 
         data_transforms = {
             'train': transforms.Compose([
-                # auto augentation
+                # autoaugent
                 SVHNPolicy(),
                 transforms.ToTensor(),
             ]),
+            'val': transforms.Compose([
+                # autoaugent
+                transforms.ToTensor(),
+            ])
         }
+
+        phase = 'val'
+        if self.is_train == True:
+            phase = 'train'
 
         # Read image
         image = Image.open(self.images[i])
@@ -63,7 +71,7 @@ class SVHNDataset(Dataset):
         labels = torch.LongTensor(labels)  # (n_objects)
 
         # Apply transformations
-        image = data_transforms['train'](image)
+        image = data_transforms[phase](image)
 
         target = {}
         target["boxes"] = boxes
@@ -75,3 +83,5 @@ class SVHNDataset(Dataset):
     def __len__(self):
         return len(self.images)
 
+def collate_fn(batch):
+    return tuple(zip(*batch))

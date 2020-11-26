@@ -8,7 +8,7 @@ model_folder = './model/'
 generate_dataset_mat = './data/train/digitStruct.mat'
 train_img_folder = './data/train/' # training dataset path
 test_img_folder = './data/test/'  # testing images
-annotation_file = './SVHN_annotation.pkl'  # training label
+annotation_file = 'SVHN_annotation.pkl'  # training label
 annotation_file = model_folder + annotation_file
 ##################################################
 # Training Config
@@ -27,7 +27,7 @@ max_size = 380
 
 # traning parameter
 
-epochs = 18
+epochs = 2
 learning_rate = 0.01
 momentum = 0.9
 weight_decay = 5e-4
@@ -36,7 +36,6 @@ milestones = [5,12]
 gamma = 0.1
 
 
-model_pth = '.'
 
 
 ##################################################

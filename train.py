@@ -90,34 +90,6 @@ def train_model(model, train_loader, valid_loader, optimizer, scheduler, num_epo
                     best_loss = running_loss
                     best_model_wts = copy.deepcopy(model.state_dict())
                     print("save best training weight,complete!")
-                
-            if phase == 'val':
-                model.eval()
-                det_boxes, det_labels, det_scores, true_boxes, true_labels = list(), list(), list(), list(), list()
-                with torch.no_grad():
-                    for iter, (images, targets) in enumerate(model_loader):
-                        images = list(image.to(device) for image in images)
-
-                        output = model(images)
-
-                        # Store this batch's results for mAP calculation
-                        boxes = [t['boxes'].to(device) for t in targets]
-                        labels = [t['labels'].to(device) for t in targets]
-
-
-                        det_boxes.extend([o['boxes'] for o in output])
-                        det_labels.extend([o['labels'] for o in output])
-                        det_scores.extend([o['scores'] for o in output])
-                        true_boxes.extend(boxes)
-                        true_labels.extend(labels)
-
-                    # Calculate mAP
-                    if((epoch+1)%2==0):
-                        _mAP = mAP(det_boxes, det_labels, det_scores, true_boxes, true_labels, device)
-                        print("valid mAP: {:.4f}".format(_mAP))                    
-                        if(best_mAP < _mAP):
-                            best_mAP = _mAP
-
         time_elapsed = time.time() - since
         print('Complete one epoch in {:.0f}m {:.0f}s'.format(
             time_elapsed // 60, time_elapsed % 60))

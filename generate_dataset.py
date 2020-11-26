@@ -51,13 +51,14 @@ def dict_img_label_bbox(mat_file):
     return data_dict
 
 if __name__ == "__main__":
-
+    print('start generate_dataset')
     data_dict = dict_img_label_bbox(cfg.generate_dataset_mat)
     # write data to digit_annotation.pkl
+    print('start generate pickle')
     f = open(cfg.annotation_file,"wb")
     pickle.dump(data_dict,f)
     f.close()
-
+    print('finish')
 
 
 
