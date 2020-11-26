@@ -4,7 +4,7 @@
 The project is training an accurate object detection neteork using Faster R-CNN for [SVHN](http://ufldl.stanford.edu/housenumbers/).
 
 ## Usage
-We training and testing with Python 3.6, pytorch 1.4 and **Need** to reference [timm](https://github.com/rwightman/pytorch-image-models), [AutoAugment](https://github.com/DeepVoltaire/AutoAugment) and [DataAugmentationForObjectDetection](https://github.com/Paperspace/DataAugmentationForObjectDetection).
+We training and testing with Python 3.6, pytorch 1.4 and **Need** to reference [timm](https://github.com/rwightman/pytorch-image-models), [AutoAugment](https://github.com/DeepVoltaire/AutoAugment), [DataAugmentationForObjectDetection](https://github.com/Paperspace/DataAugmentationForObjectDetection) and [mAP](https://github.com/sgrvinod/a-PyTorch-Tutorial-to-Object-Detection).
 
 ### Traning and Testing model
 First, this Faster R-CNN applies Efficient-Net-b4 as a backbone to extract features.\
