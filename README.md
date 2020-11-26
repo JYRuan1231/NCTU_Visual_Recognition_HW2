@@ -19,7 +19,6 @@ Example:
 ```
 python generate_dataset.py
 ```
-
 ***important arguments about Generate Dataset in config.py***
 
 Default:
@@ -45,6 +44,7 @@ Example:
 ```
 python train.py
 ```
+Alternatively, my model can be loaded: https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing
 
 ***important arguments about Traning Model in config.py***
 
