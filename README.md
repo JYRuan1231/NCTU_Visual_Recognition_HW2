@@ -118,8 +118,10 @@ Default:
 
 | Argument    | Default value |
 | ------------|:-------------:|
-|IoU_threshold             |  1 (suggest 0.2~0.5)             |
+|IoU_threshold             |  1.5 (suggest 0.2~0.5)             |
 |plot_img             |      False (True, if you want to plot testing images)       |
+
+IoU_threshold=0.3 plot_img= True:
 
 <img src="image/Visualize.png" width=400>
 
