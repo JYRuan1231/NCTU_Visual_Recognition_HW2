@@ -120,3 +120,11 @@ Default:
 |plot_img             |      False       |
 
 <img src="image/Visualize.png" width=400>
+
+
+## Result 
+
+| Metrics    | value |
+| ------------|:-------------:|
+|mAP             |     <img src="image/mAP.png" width=200>          |
+|model performance             |      <img src="image/speed.png" width=700>       |
