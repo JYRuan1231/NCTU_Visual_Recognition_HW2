@@ -99,7 +99,7 @@ Default:
 
 | Argument    | Default value |
 | ------------|:-------------:|
-|score_threshold             |  0.3             |
+|score_threshold             |  0.0             |
 |IoU_threshold             |  1 (eliminate overlapping boxes)             |
 |json_name             |      0856566.json       |
 
@@ -119,7 +119,7 @@ Default:
 | Argument    | Default value |
 | ------------|:-------------:|
 |IoU_threshold             |  1 (suggest 0.2~0.5)             |
-|plot_img             |      False       |
+|plot_img             |      False (True, if you want to plot testing image)       |
 
 <img src="image/Visualize.png" width=400>
 
