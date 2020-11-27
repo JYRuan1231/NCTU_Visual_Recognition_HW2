@@ -9,7 +9,7 @@ We training and testing with Python 3.6, pytorch 1.4 and **Need** to reference [
 ### Traning and Testing model
 First, this Faster R-CNN uses EfficientNet-b4 as a backbone to extract features.\
 If you want to use this network for training, you must generate a compliant dataset.\
-Alternatively, my model can be loaded: https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing
+Alternatively, my model can be loaded for testing: https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing 
 
 Before generating the data, Upload  the training images to `/data/train` and the test data to `/data/train`.\
 Make sure you have the mat file(default name: **digitStruct.mat**) in the `/data/train` folder.
@@ -81,7 +81,8 @@ When the program was finished, we will get a traning model file in `/model/`.
 
 ### Testing Model
 
-If we want to test image, make sure we have a model in `/model/` first and confirm `model_name`.
+If we want to test image, make sure we have a model in `/model/` first and confirm `model_name`.\
+In addition, if you want to use my trained model, upload this [model](https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing) to `/model/` and change the "model_name" to "faster_rcnn_efficientnetb4_v3_10" in `config.py`
 
 Example:
 
@@ -116,6 +117,6 @@ Default:
 | Argument    | Default value |
 | ------------|:-------------:|
 |IoU_threshold             |  1 (suggest 0.2~0.5)             |
-|plot_img             |      True       |
+|plot_img             |      False       |
 
 <img src="image/Visualize.png" width=400>
