@@ -82,7 +82,7 @@ When the program was finished, we will get a traning model file in `/model/`.
 ### Testing Model
 
 If we want to test image, make sure we have a model in `/model/` first and confirm `model_name`.\
-In addition, if you want to use my trained model, upload this [model](https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing) to `/model/` and change the "model_name" to "faster_rcnn_efficientnetb4_v3_10" in `config.py`
+In addition, if you want to use my trained model, download this [model](https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing) to `/model/` and change the "model_name" to "faster_rcnn_efficientnetb4_v3_10" in `config.py`
 
 Example:
 
