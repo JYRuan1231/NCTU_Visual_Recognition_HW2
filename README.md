@@ -10,7 +10,7 @@ We training and testing with Python 3.6, pytorch 1.4 and **Need** to reference [
 First, this Faster R-CNN uses EfficientNet-b4 as a backbone to extract features.\
 If you want to use this network for training, you must generate a compliant dataset.
 
-In addition, **my [model](https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing) can be loaded for testing**, and this is described in detail in the **Testing model** section.
+In addition, **my [model](https://drive.google.com/file/d/1QhCpAknxsPdp5527Wq4y8JjgF6a5zFc-/view?usp=sharing) can be loaded for testing**, and this is described in detail in the **Testing model** section.
 
 
 Before generating the data, Upload  the training images to `/data/train` and the test data to `/data/train`.\
@@ -84,7 +84,7 @@ When the program was finished, we will get a traning model file in `/model/`.
 ### Testing Model
 
 If we want to test image, make sure we have a model in `/model/` first and confirm `model_name`.\
-In addition, if you want to use my trained model, download this [model](https://drive.google.com/file/d/1GGAenPYp37zOxMEiZeRYLV5y_oCDHECY/view?usp=sharing) to `/model/` and change the "model_name" to "faster_rcnn_efficientnetb4_v3_10" in `config.py`
+In addition, if you want to use my trained model, download this [model](https://drive.google.com/file/d/1QhCpAknxsPdp5527Wq4y8JjgF6a5zFc-/view?usp=sharing) to `/model/` and change the "model_name" to "faster_rcnn_efficientnetb4_v3_8" in `config.py`
 
 Example:
 
@@ -100,7 +100,7 @@ Default:
 | Argument    | Default value |
 | ------------|:-------------:|
 |score_threshold             |  0.0             |
-|IoU_threshold             |  1 (eliminate overlapping boxes)             |
+|IoU_threshold             |  1.5 (Eliminate overlapping boxes. Normally the range is between 0 ~ 1, 1.5 meaning that the function is not enabled.)             |
 |json_name             |      0856566.json       |
 
 When the program was finished, we will get a json file in /result/.
