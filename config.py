@@ -27,7 +27,7 @@ max_size = 380
 
 # traning parameter
 
-epochs = 2
+epochs = 18
 learning_rate = 0.01
 momentum = 0.9
 weight_decay = 5e-4
@@ -41,7 +41,7 @@ gamma = 0.1
 ##################################################
 test_path = "./data/test/"
 
-score_threshold = 0.3
+score_threshold = 0.0
 IoU_threshold = 1
 plot_img = False
 result_pth = "./result/"
