@@ -42,7 +42,7 @@ gamma = 0.1
 test_path = "./data/test/"
 
 score_threshold = 0.0
-IoU_threshold = 1
+IoU_threshold = 1.5
 plot_img = False
 result_pth = "./result/"
 json_name = "0856566.json"  # submit json name
