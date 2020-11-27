@@ -10,7 +10,7 @@ We training and testing with Python 3.6, pytorch 1.4 and **Need** to reference [
 First, this Faster R-CNN uses EfficientNet-b4 as a backbone to extract features.\
 If you want to use this network for training, you must generate a compliant dataset.
 
-Alternatively, my model can be loaded for testing, and this is described in detail in the **Testing model** section.
+In addition, **my model can be loaded for testing**, and this is described in detail in the **Testing model** section.
 
 
 Before generating the data, Upload  the training images to `/data/train` and the test data to `/data/train`.\
